@@ -32,7 +32,9 @@
 
 /* Card Body */
 .pc-card {
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
+  height: 480px;
   height: 480px;
   border-radius: var(--card-radius);
   background: #0f0f12; /* Hampir hitam */

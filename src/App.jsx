@@ -39,8 +39,8 @@ function App() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* === HERO SECTION === */}
         <div className="hero min-h-screen grid md:grid-cols-2 items-center gap-12 pt-20 pb-20">
-          <div className="order-2 md:order-1 animate__animated animate__fadeInUp">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight leading-tight">
+          <div className="order-1 md:order-1 animate__animated animate__fadeInUp">
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white tracking-tight leading-tight">
               <ShinyText text="Hi, I'm Ryonandha" disabled={false} speed={3} className="custom-class" />
             </h1>
 
@@ -58,7 +58,7 @@ function App() {
             </div>
           </div>
 
-          <div className="order-1 md:order-2 flex justify-center md:justify-end animate__animated animate__fadeInUp animate__delay-1s relative">
+          <div className="order-2 md:order-2 flex justify-center md:justify-end animate__animated animate__fadeInUp animate__delay-1s relative">
             <div className="absolute inset-0 bg-indigo-500 blur-[80px] opacity-20 -z-10 rounded-full transform scale-75"></div>
             <ProfileCard name="Ryonandha" title="Full Stack Developer" handle="ryonandha" status="Online" contactText="Contact Me" avatarUrl="./public/ryonandha.png" showUserInfo={true} enableTilt={true} />
           </div>
@@ -68,7 +68,7 @@ function App() {
         <div className="mt-20 mx-auto w-full rounded-3xl border border-white/5 bg-white/5 backdrop-blur-xl p-8 md:p-12 shadow-2xl" id="about">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="basis-full md:basis-7/12" data-aos="fade-right">
-              <h2 className="text-4xl font-bold text-white mb-6 flex items-center gap-3">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center gap-3">
                 About <span className="text-indigo-400">Me</span>
               </h2>
 
