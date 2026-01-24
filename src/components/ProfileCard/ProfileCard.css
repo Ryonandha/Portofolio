@@ -1,33 +1,36 @@
-/* Wrapper utama */
-.profile-card-wrapper {
+/* Kotak Pembungkus Utama */
+.card-container {
   position: relative;
   width: 100%;
-  height: 500px; /* Atur tinggi sesuai keinginan */
+  height: 500px; /* Tinggi area kartu */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Agar background tidak bocor keluar */
-  border-radius: 20px; /* Opsional: membuat sudut tumpul */
+  border-radius: 20px;
+  overflow: hidden; /* Agar efek tidak bocor keluar kotak */
 }
 
-/* Container Background Balatro */
-.balatro-bg {
+/* Layer Background (Balatro) */
+.balatro-layer {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Pastikan di belakang kartu */
-  opacity: 0;
-  transition: opacity 0.5s ease; /* Efek transisi halus */
+  z-index: 1; /* Di lapisan paling bawah */
+  opacity: 0; /* Awalnya transparan (hilang) */
+  transition: opacity 0.5s ease; /* Muncul pelan-pelan */
+  pointer-events: none; /* Agar tidak mengganggu klik */
 }
 
-/* Saat active (hover), opacity jadi 1 (muncul) */
-.balatro-bg.active {
-  opacity: 1;
+.balatro-layer.muncul {
+  opacity: 1; /* Jadi terlihat saat hover */
 }
 
-/* Pastikan canvas ada di depan background */
-.profile-card-wrapper canvas {
-  z-index: 10;
+/* Layer Canvas 3D */
+.canvas-layer {
+  position: relative;
+  z-index: 10; /* Di atas background */
+  width: 100%;
+  height: 100%;
 }
