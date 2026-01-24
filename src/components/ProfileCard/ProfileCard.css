@@ -8,47 +8,49 @@
 
 /* Wrapper */
 .pc-card-wrapper {
-  perspective: 1000px; /* Sedikit diperbesar agar depth lebih natural */
+  perspective: 1000px;
   position: relative;
   z-index: 10;
 }
 
-/* Efek Glow Belakang (Backlight) */
+/* Efek Glow Belakang (Backlight) - Kita sesuaikan jadi Indigo */
 .pc-card-wrapper::before {
   content: "";
   position: absolute;
-  inset: -10px; /* Sedikit lebih rapat */
-  background: var(--behind-gradient);
-  filter: blur(25px); /* Blur dikurangi agar warna lebih tajam */
+  inset: -20px;
+  background: radial-gradient(circle at 50% 50%, #4338ca, transparent 70%); /* INDIGO GLOW */
+  filter: blur(40px);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
   border-radius: inherit;
   z-index: -1;
 }
 
 .pc-card-wrapper.active::before {
-  opacity: 0.8; /* Jangan terlalu terang agar teks tetap terbaca */
+  opacity: 0.6;
 }
 
-/* Card */
+/* Card Body */
 .pc-card {
   width: 320px;
   height: 480px;
   border-radius: var(--card-radius);
-  background: black;
+  background: #0f0f12; /* Hampir hitam */
   transform-style: preserve-3d;
   transform: rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
-  transition: transform 0.1s linear; /* Ubah ke linear agar gerakan mouse lebih responsif */
+  transition: transform 0.1s linear;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Border tipis elegan */
 }
 
 /* Inside Background */
 .pc-inside {
   position: absolute;
   inset: 0;
-  background: var(--inner-gradient);
+  /* Gradasi Background Kartu yang lebih soft */
+  background: linear-gradient(180deg, rgba(30, 27, 75, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
   z-index: 1;
 }
 
@@ -63,107 +65,88 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Opsional: Jika ingin foto lebih menyatu dengan background */
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  /* Masking agar bagian bawah foto nge-blend dengan background */
+  mask-image: linear-gradient(to bottom, black 50%, transparent 95%);
 }
 
-/* --- PERBAIKAN 2: EFEK BALATRO HOVER (HOLOGRAPHIC SHINE) --- */
-/* --- Silver Hologram Shine Effect --- */
+/* --- EFEK KILAU SILVER (ELEGAN) --- */
 .pc-shine {
   position: absolute;
   inset: 0;
-  z-index: 4; /* Di atas avatar tapi di bawah teks */
+  z-index: 4;
 
-  /*
-   * Membuat gradasi radial yang berpusat di posisi mouse (var pointer-x/y).
-   * Menggunakan warna Putih -> Silver -> Transparan.
-   */
-  background: radial-gradient(
-    circle at var(--pointer-x) var(--pointer-y),
-    rgba(255, 255, 255, 0.95) 0%,
-    /* Pusat kilau: Putih sangat terang */ rgba(210, 215, 220, 0.6) 25%,
-    /* Mid-tone: Abu-abu perak */ rgba(150, 150, 160, 0.2) 45%,
-    /* Outer rim: Abu-abu gelap transparan */ transparent 70% /* Sisa area: Transparan */
-  );
+  /* Kilau putih transparan yang bergerak mengikuti mouse */
+  background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, 0.15) 0%, transparent 60%);
 
-  /*
-   * 'overlay' atau 'color-dodge' memberikan efek terbaik untuk kilau metalik
-   * saat ditumpuk di atas gambar yang gelap.
-   */
   mix-blend-mode: overlay;
-
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
-  will-change: opacity, background; /* Optimasi performa rendering */
 }
 
-/* Pastikan shine muncul saat wrapper di-hover */
 .pc-card-wrapper.active .pc-shine {
-  opacity: 1; /* Set ke 1 agar kilau silvernya maksimal */
+  opacity: 1;
 }
 
 /* Text Details */
 .pc-details {
   position: absolute;
-  top: 30px;
+  top: 35px;
   width: 100%;
   text-align: center;
   z-index: 5;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .pc-details h3 {
   margin: 0;
   color: white;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .pc-details p {
-  margin: 5px 0 0;
-  color: #cfd2ff;
-  font-size: 16px;
+  margin: 6px 0 0;
+  color: #a5b4fc; /* Warna Indigo muda */
+  font-size: 15px;
+  font-weight: 400;
 }
 
-/* --- Bottom Info Container --- */
+/* Bottom Info Container (SUDAH DIPERBAIKI) */
 .pc-user-info {
   position: absolute;
   bottom: 25px;
   left: 20px;
   right: 20px;
-
-  /* Flexbox Layout yang Benar */
   display: flex;
-  justify-content: space-between; /* Memisahkan kiri (avatar) dan kanan (tombol) */
-  align-items: center; /* KUNCI: Membuat vertikal rata tengah */
+  justify-content: space-between;
+  align-items: center;
 
-  /* Styling Box */
-  backdrop-filter: blur(12px);
-  background: rgba(20, 20, 30, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 8px 12px; /* Padding disesuaikan agar tidak terlalu tebal */
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.05); /* Glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 8px 12px;
   z-index: 5;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Bagian Kiri: Avatar Kecil + Teks */
 .pc-user-details {
   display: flex;
   align-items: center;
   gap: 10px;
-  flex: 1; /* Mengisi ruang kosong agar tombol terdorong ke kanan */
-  overflow: hidden; /* Mencegah teks panjang merusak layout */
+  flex: 1;
+  overflow: hidden;
 }
 
-/* Mini Avatar */
 .pc-mini-avatar {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0; /* Agar tidak tergencet */
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .pc-mini-avatar img {
@@ -173,22 +156,19 @@
   display: block;
 }
 
-/* Teks Handle & Status */
 .pc-handle {
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .pc-status {
   font-size: 11px;
-  color: #aaa;
+  color: #94a3b8;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .pc-status::before {
@@ -196,41 +176,38 @@
   display: block;
   width: 6px;
   height: 6px;
-  background: #4ade80; /* Warna hijau online */
+  background: #4ade80;
   border-radius: 50%;
+  box-shadow: 0 0 5px #4ade80;
 }
 
-/* --- Tombol Contact Me --- */
+/* Tombol Contact Me (YANG RAPI) */
 .pc-contact-btn {
-  /* Layout & Size */
-  display: inline-flex; /* Agar isi tombol rata tengah */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 34px;
+  padding: 0 14px;
+  margin-left: 8px;
 
-  height: 36px; /* Tinggi fix agar serasi dengan avatar (40px) */
-  padding: 0 16px; /* Padding kiri-kanan saja */
-  margin-left: 10px; /* Jarak dari teks nama */
+  white-space: nowrap;
+  flex-shrink: 0;
 
-  /* Anti-Berantakan */
-  white-space: nowrap; /* WAJIB: Mencegah teks turun baris */
-  flex-shrink: 0; /* Mencegah tombol mengecil/gepeng */
-
-  /* Styling */
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  background: white;
+  color: black;
+  border: none;
   border-radius: 10px;
 
-  /* Font */
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none; /* Hilangkan garis bawah link */
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .pc-contact-btn:hover {
-  background: white;
-  color: black;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
 }
