@@ -1,56 +1,61 @@
 // src/data.js
 
-// PERUBAHAN 1: Tidak perlu import gambar dari public.
-// Cukup tulis path-nya sebagai string. Vite otomatis tahu itu ada di folder public.
+// 1. IMPORT SEMUA GAMBAR DI ATAS
+// (VS Code akan otomatis cek apakah file ini ada. Kalau merah, berarti nama file salah!)
+import imgVscode from "./assets/tools/vscode.png";
+import imgReact from "./assets/tools/reactjs.png";
+import imgNext from "./assets/tools/nextjs.png";
+import imgTailwind from "./assets/tools/tailwind.png";
+
+// Import gambar proyek (sementara pakai gambar tools dulu jika belum ada screenshot)
+import imgProyek1 from "./assets/tools/vscode.png";
 
 export const listTools = [
   {
     id: 1,
-    // Pastikan file "vscode.png" ada di folder: public/tools/vscode.png
-    gambar: "/tools/vscode.png",
+    gambar: imgVscode, // Panggil variabel import tadi
     nama: "VS Code",
     ket: "Code Editor",
     dad: "100",
   },
   {
     id: 2,
-    gambar: "/tools/reactjs.png",
+    gambar: imgReact,
     nama: "React JS",
     ket: "Framework",
     dad: "200",
   },
   {
     id: 3,
-    gambar: "/tools/nextjs.png",
+    gambar: imgNext,
     nama: "Next JS",
     ket: "Framework",
     dad: "300",
   },
   {
     id: 4,
-    gambar: "/tools/tailwind.png",
+    gambar: imgTailwind,
     nama: "Tailwind",
     ket: "Styling",
     dad: "400",
   },
 ];
 
-// PERUBAHAN 2: Isi data proyekmu sendiri agar beda dari template
 export const listProyek = [
   {
     id: 1,
     title: "Sistem Monitoring Mental",
-    subtitle: "Analisis Emosi dengan AI",
-    fullDescription: "Aplikasi pendeteksi kesehatan mental mahasiswa menggunakan IndoBERT.",
-    image: "https://via.placeholder.com/400x300", // Ganti dengan screenshot proyekmu nanti
+    subtitle: "Analisis Emosi AI",
+    fullDescription: "Aplikasi deteksi kesehatan mental mahasiswa.",
+    image: imgProyek1, // Pakai variabel import
     dad: "100",
   },
   {
     id: 2,
     title: "Freelance Data Entry",
     subtitle: "Pengalaman Kerja",
-    fullDescription: "Membantu klien mengolah data Excel dan statistik penjualan.",
-    image: "https://via.placeholder.com/400x300",
+    fullDescription: "Pengolahan data Excel dan statistik.",
+    image: imgProyek1, // Pakai variabel import
     dad: "200",
   },
 ];

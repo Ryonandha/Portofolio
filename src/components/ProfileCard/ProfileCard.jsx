@@ -1,68 +1,106 @@
-import { Canvas } from "@react-three/fiber";
-import { useTexture, Float, OrbitControls } from "@react-three/drei";
-import { useState } from "react";
-import Balatro from "../Backgrounds/Balatro";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
 
-// 1. KARTU DIGITAL (Pengganti file .glb)
-function KartuDigital() {
-  // Memanggil foto dari folder PUBLIC
-  // JIKA ERROR: Pastikan file 'depan.jpg' ada di folder 'public'
-  const textureDepan = useTexture("/depan.png");
-  const textureBelakang = useTexture("/belakang.png");
+const BEHIND_GRADIENT_BALATRO = `
+conic-gradient(
+  from 0deg at 50% 50%,
+  #ff3cac,
+  #784ba0,
+  #2b86c5,
+  #ff3cac
+)
+`;
 
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      {/* Membuat MESH (Benda 3D) berbentuk Kotak */}
-      <mesh rotation={[0, Math.PI, 0]}>
-        {/* UKURAN KARTU: [Lebar, Tinggi, Tebal] */}
-        <boxGeometry args={[3.2, 2.0, 0.03]} />
+const INNER_GRADIENT = "linear-gradient(145deg, rgba(96,73,110,0.6) 0%, rgba(113,196,255,0.3) 100%)";
 
-        {/* MATERIAL (Kulit Benda) */}
-        {/* Sisi Samping Kanan, Kiri, Atas, Bawah (Warna Gelap) */}
-        <meshStandardMaterial attach="material-0" color="#111" />
-        <meshStandardMaterial attach="material-1" color="#111" />
-        <meshStandardMaterial attach="material-2" color="#111" />
-        <meshStandardMaterial attach="material-3" color="#111" />
+const clamp = (v, min = 0, max = 100) => Math.min(Math.max(v, min), max);
 
-        {/* Sisi DEPAN (Foto Kamu) */}
-        <meshStandardMaterial attach="material-4" map={textureDepan} />
+const ProfileCard = ({ avatarUrl, miniAvatarUrl, name = "Ryonandha", title = "Frontend Developer", handle = "ryonandha", status = "Available", email = "ryonandhar@gmail.com" }) => {
+  const wrapRef = useRef(null);
+  const cardRef = useRef(null);
 
-        {/* Sisi BELAKANG (Foto Belakang) */}
-        <meshStandardMaterial attach="material-5" map={textureBelakang} />
-      </mesh>
-    </Float>
+  const handlePointerMove = useCallback((e) => {
+    const card = cardRef.current;
+    const wrap = wrapRef.current;
+    if (!card || !wrap) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = clamp(((e.clientX - rect.left) / rect.width) * 100);
+    const y = clamp(((e.clientY - rect.top) / rect.height) * 100);
+
+    wrap.style.setProperty("--pointer-x", `${x}%`);
+    wrap.style.setProperty("--pointer-y", `${y}%`);
+    wrap.style.setProperty("--rotate-x", `${(50 - x) / 6}deg`);
+    wrap.style.setProperty("--rotate-y", `${(y - 50) / 6}deg`);
+  }, []);
+
+  const handleEnter = () => {
+    wrapRef.current.classList.add("active");
+  };
+
+  const handleLeave = () => {
+    wrapRef.current.classList.remove("active");
+    wrapRef.current.style.setProperty("--rotate-x", `0deg`);
+    wrapRef.current.style.setProperty("--rotate-y", `0deg`);
+  };
+
+  useEffect(() => {
+    const card = cardRef.current;
+    card.addEventListener("pointermove", handlePointerMove);
+    card.addEventListener("pointerenter", handleEnter);
+    card.addEventListener("pointerleave", handleLeave);
+
+    return () => {
+      card.removeEventListener("pointermove", handlePointerMove);
+      card.removeEventListener("pointerenter", handleEnter);
+      card.removeEventListener("pointerleave", handleLeave);
+    };
+  }, [handlePointerMove]);
+
+  const styleVars = useMemo(
+    () => ({
+      "--behind-gradient": BEHIND_GRADIENT_BALATRO,
+      "--inner-gradient": INNER_GRADIENT,
+    }),
+    [],
   );
-}
-
-// 2. TAMPILAN UTAMA
-const ProfileCard = () => {
-  const [isHovering, setIsHovering] = useState(false);
 
   return (
-    <div
-      className="card-container"
-      // Event saat mouse masuk/keluar
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
-      {/* LAYER 1: Background Balatro (Hanya muncul saat hover) */}
-      <div className={`balatro-layer ${isHovering ? "muncul" : ""}`}>
-        {/* Kita render selalu, mainkan opacity saja agar performa mulus */}
-        <Balatro />
-      </div>
+    <div ref={wrapRef} className="pc-card-wrapper" style={styleVars}>
+      <section ref={cardRef} className="pc-card">
+        <div className="pc-inside">
+          <div className="pc-shine" />
+          <div className="pc-glare" />
 
-      {/* LAYER 2: Canvas 3D */}
-      <div className="canvas-layer">
-        <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-          <ambientLight intensity={1.5} />
-          <directionalLight position={[2, 2, 5]} intensity={1} />
+          {/* Avatar */}
+          <div className="pc-avatar-content">
+            <img className="avatar" src={avatarUrl} alt="avatar" />
+          </div>
 
-          <KartuDigital />
+          {/* Text */}
+          <div className="pc-details">
+            <h3>{name}</h3>
+            <p>{title}</p>
+          </div>
 
-          <OrbitControls enableZoom={false} />
-        </Canvas>
-      </div>
+          {/* Bottom info */}
+          <div className="pc-user-info">
+            <div className="pc-user-details">
+              <div className="pc-mini-avatar">
+                <img src={miniAvatarUrl || avatarUrl} alt="mini avatar" />
+              </div>
+              <div>
+                <div className="pc-handle">@{handle}</div>
+                <div className="pc-status">{status}</div>
+              </div>
+            </div>
+
+            <button className="pc-contact-btn" onClick={() => (window.location.href = `mailto:${email}?subject=Portfolio Inquiry`)}>
+              Contact Me
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

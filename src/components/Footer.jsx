@@ -18,14 +18,14 @@ const Footer = () => {
 
         {/* Ikon Sosmed - di tengah di mobile */}
         <div className="flex gap-3 order-2 md:order-none">
-          <a href="https://github.com/rissss21">
+          <a href="https://github.com/Ryonandha">
             <i className="ri-github-fill ri-2x"></i>
           </a>
-          <a href="https://www.instagram.com/farisedrikprayoga/">
+          <a href="https://www.instagram.com/ryon_ap/">
             <i className="ri-instagram-fill ri-2x"></i>
           </a>
-          <a href="https://www.youtube.com/@FarisEdrikPrayoga">
-            <i className="ri-youtube-fill ri-2x"></i>
+          <a href="https://www.gmail.com/ryonandhar@gmail.com">
+            <i className="ri-gmail-fill ri-2x"></i>
           </a>
         </div>
 

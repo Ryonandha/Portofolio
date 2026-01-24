@@ -1,36 +1,236 @@
-/* Kotak Pembungkus Utama */
-.card-container {
-  position: relative;
-  width: 100%;
-  height: 500px; /* Tinggi area kartu */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  overflow: hidden; /* Agar efek tidak bocor keluar kotak */
+:root {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --card-radius: 28px;
 }
 
-/* Layer Background (Balatro) */
-.balatro-layer {
+/* Wrapper */
+.pc-card-wrapper {
+  perspective: 1000px; /* Sedikit diperbesar agar depth lebih natural */
+  position: relative;
+  z-index: 10;
+}
+
+/* Efek Glow Belakang (Backlight) */
+.pc-card-wrapper::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Di lapisan paling bawah */
-  opacity: 0; /* Awalnya transparan (hilang) */
-  transition: opacity 0.5s ease; /* Muncul pelan-pelan */
-  pointer-events: none; /* Agar tidak mengganggu klik */
+  inset: -10px; /* Sedikit lebih rapat */
+  background: var(--behind-gradient);
+  filter: blur(25px); /* Blur dikurangi agar warna lebih tajam */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+  z-index: -1;
 }
 
-.balatro-layer.muncul {
-  opacity: 1; /* Jadi terlihat saat hover */
+.pc-card-wrapper.active::before {
+  opacity: 0.8; /* Jangan terlalu terang agar teks tetap terbaca */
 }
 
-/* Layer Canvas 3D */
-.canvas-layer {
+/* Card */
+.pc-card {
+  width: 320px;
+  height: 480px;
+  border-radius: var(--card-radius);
+  background: black;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+  transition: transform 0.1s linear; /* Ubah ke linear agar gerakan mouse lebih responsif */
+  overflow: hidden;
   position: relative;
-  z-index: 10; /* Di atas background */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Inside Background */
+.pc-inside {
+  position: absolute;
+  inset: 0;
+  background: var(--inner-gradient);
+  z-index: 1;
+}
+
+/* Avatar Utama */
+.pc-avatar-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.avatar {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  /* Opsional: Jika ingin foto lebih menyatu dengan background */
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+/* --- PERBAIKAN 2: EFEK BALATRO HOVER (HOLOGRAPHIC SHINE) --- */
+/* --- Silver Hologram Shine Effect --- */
+.pc-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 4; /* Di atas avatar tapi di bawah teks */
+
+  /*
+   * Membuat gradasi radial yang berpusat di posisi mouse (var pointer-x/y).
+   * Menggunakan warna Putih -> Silver -> Transparan.
+   */
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.95) 0%,
+    /* Pusat kilau: Putih sangat terang */ rgba(210, 215, 220, 0.6) 25%,
+    /* Mid-tone: Abu-abu perak */ rgba(150, 150, 160, 0.2) 45%,
+    /* Outer rim: Abu-abu gelap transparan */ transparent 70% /* Sisa area: Transparan */
+  );
+
+  /*
+   * 'overlay' atau 'color-dodge' memberikan efek terbaik untuk kilau metalik
+   * saat ditumpuk di atas gambar yang gelap.
+   */
+  mix-blend-mode: overlay;
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  will-change: opacity, background; /* Optimasi performa rendering */
+}
+
+/* Pastikan shine muncul saat wrapper di-hover */
+.pc-card-wrapper.active .pc-shine {
+  opacity: 1; /* Set ke 1 agar kilau silvernya maksimal */
+}
+
+/* Text Details */
+.pc-details {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pc-details h3 {
+  margin: 0;
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.pc-details p {
+  margin: 5px 0 0;
+  color: #cfd2ff;
+  font-size: 16px;
+}
+
+/* --- Bottom Info Container --- */
+.pc-user-info {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  right: 20px;
+
+  /* Flexbox Layout yang Benar */
+  display: flex;
+  justify-content: space-between; /* Memisahkan kiri (avatar) dan kanan (tombol) */
+  align-items: center; /* KUNCI: Membuat vertikal rata tengah */
+
+  /* Styling Box */
+  backdrop-filter: blur(12px);
+  background: rgba(20, 20, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 8px 12px; /* Padding disesuaikan agar tidak terlalu tebal */
+  z-index: 5;
+}
+
+/* Bagian Kiri: Avatar Kecil + Teks */
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1; /* Mengisi ruang kosong agar tombol terdorong ke kanan */
+  overflow: hidden; /* Mencegah teks panjang merusak layout */
+}
+
+/* Mini Avatar */
+.pc-mini-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0; /* Agar tidak tergencet */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.pc-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Teks Handle & Status */
+.pc-handle {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pc-status {
+  font-size: 11px;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pc-status::before {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #4ade80; /* Warna hijau online */
+  border-radius: 50%;
+}
+
+/* --- Tombol Contact Me --- */
+.pc-contact-btn {
+  /* Layout & Size */
+  display: inline-flex; /* Agar isi tombol rata tengah */
+  align-items: center;
+  justify-content: center;
+
+  height: 36px; /* Tinggi fix agar serasi dengan avatar (40px) */
+  padding: 0 16px; /* Padding kiri-kanan saja */
+  margin-left: 10px; /* Jarak dari teks nama */
+
+  /* Anti-Berantakan */
+  white-space: nowrap; /* WAJIB: Mencegah teks turun baris */
+  flex-shrink: 0; /* Mencegah tombol mengecil/gepeng */
+
+  /* Styling */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 10px;
+
+  /* Font */
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none; /* Hilangkan garis bawah link */
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pc-contact-btn:hover {
+  background: white;
+  color: black;
+  transform: translateY(-1px);
 }
