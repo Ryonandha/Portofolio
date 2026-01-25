@@ -29,10 +29,7 @@ function App() {
     <>
       {/* === BACKGROUND COSMIC MIDNIGHT === */}
       <div className="absolute top-0 left-0 w-full h-full -z-10 bg-[#0f172a]">
-        <Aurora
-          colorStops={["#312e81", "#4338ca", "#1e1b4b"]} // Indigo - Violet - Dark
-          speed={0.8}
-        />
+        <Aurora colorStops={["#312e81", "#4338ca", "#1e1b4b"]} speed={0.8} />
         <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]"></div>
       </div>
 
@@ -52,7 +49,8 @@ function App() {
               <a href="#project" className="bg-indigo-600 text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-500 transition-all transform hover:scale-105 shadow-[0_0_15px_rgba(99,102,241,0.5)]">
                 View My Work
               </a>
-              <a href="./Public/CV.pdf" download className="border border-indigo-500/30 bg-indigo-900/20 backdrop-blur-md text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-500/20 transition-all">
+              {/* PERBAIKAN 1: Path CV yang Benar */}
+              <a href="/CV.pdf" download="CV_Ryonandha.pdf" className="border border-indigo-500/30 bg-indigo-900/20 backdrop-blur-md text-white px-8 py-4 rounded-full font-bold hover:bg-indigo-500/20 transition-all">
                 Download CV
               </a>
             </div>
@@ -60,18 +58,18 @@ function App() {
 
           <div className="order-2 md:order-2 flex justify-center md:justify-end animate__animated animate__fadeInUp animate__delay-1s relative">
             <div className="absolute inset-0 bg-indigo-500 blur-[80px] opacity-20 -z-10 rounded-full transform scale-75"></div>
-            <ProfileCard name="Ryonandha" title="Full Stack Developer" handle="ryonandha" status="Online" contactText="Contact Me" avatarUrl="./public/ryonandha.png" showUserInfo={true} enableTilt={true} />
+            {/* PERBAIKAN 2: Path Avatar yang Benar */}
+            <ProfileCard name="Ryonandha" title="Full Stack Developer" handle="ryonandha" status="Online" contactText="Contact Me" avatarUrl="/ryonandha.png" showUserInfo={true} enableTilt={true} />
           </div>
         </div>
 
-        {/* === ABOUT ME SECTION (SHORT & ENGLISH) === */}
+        {/* === ABOUT ME SECTION === */}
         <div className="mt-20 mx-auto w-full rounded-3xl border border-white/5 bg-white/5 backdrop-blur-xl p-8 md:p-12 shadow-2xl" id="about">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="basis-full md:basis-7/12" data-aos="fade-right">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 flex items-center gap-3">
                 About <span className="text-indigo-400">Me</span>
               </h2>
-
               <p className="text-gray-300 leading-relaxed mb-8 text-lg font-light">
                 I’m Ryonandha Mitchell, a Full Stack Developer dedicated to crafting seamless and high-performance digital experiences. With a strong foundation in Information Systems and a passion for modern web technologies like React,
                 Node.js, and AI integration, I transform complex ideas into intuitive, scalable applications. Backed by over 3 years of experience and 20+ successful projects, I strive to deliver functional and aesthetically pleasing
@@ -94,7 +92,6 @@ function App() {
               </div>
             </div>
 
-            {/* Lanyard */}
             <div className="basis-full md:basis-5/12 h-[350px] w-full relative">
               <Lanyard position={[0, 0, 15]} gravity={[0, -40, 0]} />
             </div>
