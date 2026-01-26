@@ -19,12 +19,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-[#0f172a]/80 backdrop-blur-md border-b border-indigo-500/10 shadow-lg shadow-indigo-500/10" : "bg-transparent"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || isOpen ? "bg-[#0f172a]/90 backdrop-blur-md border-b border-indigo-500/10 shadow-lg" : "bg-transparent"}`}>
+      {/* PERUBAHAN: max-w-6xl dan padding yang sama dengan App.jsx */}
+      <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 cursor-pointer group">
-            <a href="#" className="text-2xl font-bold tracking-wider text-white">
+            <a href="#" className="text-xl md:text-2xl font-bold tracking-wider text-white">
               <ShinyText text="Portofolio" disabled={false} speed={3} className="custom-class" />
             </a>
           </div>
@@ -38,7 +39,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (Kode sama seperti sebelumnya) */}
           <div className="-mr-2 flex md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-900 focus:outline-none transition-colors">
               <span className="sr-only">Open main menu</span>
@@ -56,27 +57,24 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {isOpen && (
-        <div className="md:hidden bg-[#0f172a] border-b border-indigo-500/20 backdrop-blur-xl">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>
-              About
-            </MobileNavLink>
-            <MobileNavLink href="#project" onClick={() => setIsOpen(false)}>
-              Project
-            </MobileNavLink>
-            <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </MobileNavLink>
-          </div>
+      {/* Mobile Menu Dropdown (Kode sama seperti sebelumnya) */}
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}>
+        <div className="bg-[#0f172a] border-b border-indigo-500/20 px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-2xl">
+          <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>
+            About
+          </MobileNavLink>
+          <MobileNavLink href="#project" onClick={() => setIsOpen(false)}>
+            Project
+          </MobileNavLink>
+          <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>
+            Contact
+          </MobileNavLink>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
 
-// Komponen Link dengan Hover Indigo
 const NavLink = ({ href, children }) => (
   <a href={href} className="text-gray-300 hover:text-indigo-400 hover:bg-white/5 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">
     {children}
