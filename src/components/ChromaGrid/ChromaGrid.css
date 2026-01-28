@@ -1,18 +1,89 @@
+.chroma-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
 .chroma-card {
   position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   overflow: hidden;
-  border-radius: 1rem;
+  cursor: pointer;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  cursor: pointer;
 }
 
 .chroma-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
-.chroma-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+.chroma-image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #000;
+}
+
+.chroma-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Agar gambar memenuhi kotak tanpa gepeng */
+  transition: transform 0.5s ease;
+}
+
+.chroma-card:hover .chroma-img {
+  transform: scale(1.05);
+}
+
+.chroma-details {
+  padding: 1.5rem;
+}
+
+.chroma-title {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.chroma-desc {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Batasi teks hanya 2 baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.chroma-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chroma-tag {
+  background: rgba(99, 102, 241, 0.1);
+  color: #818cf8;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.chroma-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gray;
+  background: #1e1b4b;
 }
