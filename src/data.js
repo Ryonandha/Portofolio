@@ -1,6 +1,6 @@
 // src/data.js
 
-// === 1. IMPORT GAMBAR TOOLS ===
+// 1. IMPORT GAMBAR TOOLS (Gunakan gambar yang SUDAH ADA di folder assets)
 import imgVscode from "./assets/tools/vscode.png";
 import imgReact from "./assets/tools/reactjs.png";
 import imgNext from "./assets/tools/nextjs.png";
@@ -11,88 +11,26 @@ import imgJs from "./assets/tools/js.png";
 import imgPHP from "./assets/tools/php.png";
 import imgMySQL from "./assets/tools/mysql.png";
 import imgTs from "./assets/tools/ts.png";
-import imgLaravel from "./assets/tools/laravel.png"; // Pastikan ikon ini ada atau ganti dengan imgPHP sementara
-import imgPython from "./assets/tools/python.png"; // Pastikan ikon ini ada atau ganti dengan imgVscode sementara
 
-// === 2. IMPORT GAMBAR PROYEK (Ganti ini dengan Screenshot Asli nanti) ===
-// Contoh cara import gambar asli nanti:
-// import projMental1 from "./assets/projects/mental-1.png";
-// import projMental2 from "./assets/projects/mental-2.png";
+// PENTING: Gunakan gambar placeholder yang ADA dulu agar tidak error build
+// Nanti Anda bisa upload gambar laravel.png dan python.png ke folder assets jika sudah ada
+const imgLaravel = imgPHP; // Placeholder sementara pakai PHP
+const imgPython = imgVscode; // Placeholder sementara pakai VS Code
 
-// SEMENTARA pakai gambar tools sebagai placeholder agar tidak error
-import placeholderImg from "./assets/tools/vscode.png";
+// Placeholder untuk gambar project
+const placeholderImg = imgVscode;
 
 export const listTools = [
-  {
-    id: 1,
-    gambar: imgVscode,
-    nama: "VS Code",
-    ket: "Code Editor",
-    dad: "100",
-  },
-  {
-    id: 2,
-    gambar: imgReact,
-    nama: "React JS",
-    ket: "Frontend Lib",
-    dad: "200",
-  },
-  {
-    id: 3,
-    gambar: imgNext,
-    nama: "Next JS",
-    ket: "React Framework",
-    dad: "300",
-  },
-  {
-    id: 4,
-    gambar: imgTailwind,
-    nama: "Tailwind",
-    ket: "CSS Framework",
-    dad: "400",
-  },
-  {
-    id: 5,
-    gambar: imgVite,
-    nama: "Vite",
-    ket: "Build Tool",
-    dad: "500",
-  },
-  {
-    id: 6,
-    gambar: imgFigma,
-    nama: "Figma",
-    ket: "UI/UX Design",
-    dad: "600",
-  },
-  {
-    id: 7,
-    gambar: imgJs,
-    nama: "JavaScript",
-    ket: "Language",
-    dad: "700",
-  },
-  {
-    id: 8,
-    gambar: imgPHP,
-    nama: "PHP",
-    ket: "Backend Lang",
-    dad: "800",
-  },
-  {
-    id: 9,
-    gambar: imgMySQL,
-    nama: "MySQL",
-    ket: "Database",
-    dad: "900",
-  },
-  {
-    id: 10,
-    gambar: imgTs,
-    nama: "TypeScript",
-    ket: "Language",
-    dad: "1000",
-  },
+  { id: 1, gambar: imgVscode, nama: "VS Code", ket: "Code Editor", dad: "100" },
+  { id: 2, gambar: imgReact, nama: "React JS", ket: "Frontend Lib", dad: "200" },
+  { id: 3, gambar: imgNext, nama: "Next JS", ket: "React Framework", dad: "300" },
+  { id: 4, gambar: imgTailwind, nama: "Tailwind", ket: "CSS Framework", dad: "400" },
+  { id: 5, gambar: imgVite, nama: "Vite", ket: "Build Tool", dad: "500" },
+  { id: 6, gambar: imgFigma, nama: "Figma", ket: "UI/UX Design", dad: "600" },
+  { id: 7, gambar: imgJs, nama: "JavaScript", ket: "Language", dad: "700" },
+  { id: 8, gambar: imgPHP, nama: "PHP", ket: "Backend Lang", dad: "800" },
+  { id: 9, gambar: imgMySQL, nama: "MySQL", ket: "Database", dad: "900" },
+  { id: 10, gambar: imgTs, nama: "TypeScript", ket: "Language", dad: "1000" },
 ];
 
 export const listProyek = [
@@ -101,8 +39,8 @@ export const listProyek = [
     title: "Mental Health Detection",
     // Gunakan array images agar slider berfungsi
     images: [placeholderImg, placeholderImg],
-    deskripsi: "Sistem deteksi dini kesehatan mental mahasiswa menggunakan metode IndoBERT (NLP). Proyek ini mengklasifikasikan teks curhatan mahasiswa untuk mendeteksi indikasi depresi atau kecemasan.",
-    github: "https://github.com/Ryonandha", // Update link repo spesifik jika ada
+    deskripsi: "Sistem deteksi dini kesehatan mental mahasiswa menggunakan metode IndoBERT.",
+    github: "https://github.com/Ryonandha",
     demo: null,
     tech: ["Python", "IndoBERT", "Flask", "React"],
     dad: "100",
@@ -110,8 +48,8 @@ export const listProyek = [
   {
     id: 2,
     title: "SMS Spam Detector",
-    images: [placeholderImg, placeholderImg],
-    deskripsi: "Aplikasi Machine Learning untuk mendeteksi SMS spam dalam bahasa Indonesia. Menggunakan algoritma klasifikasi teks untuk memisahkan pesan penipuan dan pesan normal.",
+    images: [placeholderImg],
+    deskripsi: "Aplikasi Machine Learning untuk mendeteksi SMS spam dalam bahasa Indonesia.",
     github: "https://github.com/Ryonandha",
     demo: "https://ryonandha.github.io/sms-spam-detection",
     tech: ["Python", "Streamlit", "Scikit-Learn"],
@@ -121,7 +59,7 @@ export const listProyek = [
     id: 3,
     title: "Movie Discovery App",
     images: [placeholderImg],
-    deskripsi: "Aplikasi pencarian film interaktif yang menggunakan TMDB API. Memungkinkan pengguna melihat film populer, detail film, dan rating secara real-time.",
+    deskripsi: "Aplikasi pencarian film interaktif yang menggunakan TMDB API.",
     github: "https://github.com/Ryonandha",
     demo: null,
     tech: ["React JS", "Tailwind CSS", "TMDB API"],
@@ -131,7 +69,7 @@ export const listProyek = [
     id: 4,
     title: "Interactive Kanban Board",
     images: [placeholderImg],
-    deskripsi: "Aplikasi manajemen tugas bergaya Trello dengan fitur Drag-and-Drop. Membantu mengorganisir status tugas (To Do, In Progress, Done).",
+    deskripsi: "Aplikasi manajemen tugas bergaya Trello dengan fitur Drag-and-Drop.",
     github: "https://github.com/Ryonandha",
     demo: null,
     tech: ["React JS", "Dnd Kit", "Tailwind"],
@@ -141,7 +79,7 @@ export const listProyek = [
     id: 5,
     title: "Task Management API",
     images: [placeholderImg],
-    deskripsi: "Backend API lengkap untuk aplikasi manajemen tugas. Mendukung autentikasi pengguna (Sanctum), CRUD tugas, dan dokumentasi API otomatis.",
+    deskripsi: "Backend API lengkap untuk aplikasi manajemen tugas dengan autentikasi.",
     github: "https://github.com/Ryonandha",
     demo: null,
     tech: ["Laravel", "MySQL", "Scribe"],
@@ -151,7 +89,7 @@ export const listProyek = [
     id: 6,
     title: "Price Scraping Tool",
     images: [placeholderImg],
-    deskripsi: "Bot otomatisasi untuk memantau harga produk e-commerce dan menyimpan riwayat harga ke database untuk analisis tren pasar.",
+    deskripsi: "Bot otomatisasi untuk memantau harga produk e-commerce.",
     github: "https://github.com/Ryonandha",
     demo: null,
     tech: ["Python", "Selenium", "Supabase"],

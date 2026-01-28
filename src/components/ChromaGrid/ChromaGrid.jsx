@@ -5,19 +5,34 @@ const ChromaGrid = ({ items, onItemClick }) => {
   return (
     <div className="chroma-grid">
       {items.map((item) => {
-        // LOGIKA BARU: Ambil gambar pertama dari array 'images'
-        // Jika tidak ada array, coba cari properti 'image' lama sebagai cadangan
-        const thumbnail = item.images && item.images.length > 0 ? item.images[0] : item.image;
+        // LOGIKA PENYELAMAT:
+        // Cek apakah pakai array 'images' ATAU string 'image' biasa
+        // Ini mencegah error "undefined" yang bikin tampilan jelek
+        const thumbnail = item.images && item.images.length > 0 ? item.images[0] : item.image || null;
 
         return (
-          <div key={item.id} className="chroma-card" onClick={() => onItemClick(item)}>
+          <div
+            key={item.id}
+            className="chroma-card"
+            onClick={() => onItemClick(item)}
+            data-aos="fade-up" // Tambahkan animasi agar muncul pelan-pelan
+          >
             <div className="chroma-content">
               {/* Gambar Thumbnail */}
-              <div className="chroma-image-wrapper">{thumbnail ? <img src={thumbnail} alt={item.title} className="chroma-img" /> : <div className="chroma-placeholder">No Image</div>}</div>
+              <div className="chroma-image-wrapper">
+                {thumbnail ? (
+                  <img src={thumbnail} alt={item.title} className="chroma-img" />
+                ) : (
+                  // Tampilan jika gambar tidak ditemukan (Placeholder Rapi)
+                  <div className="w-full h-full flex items-center justify-center bg-indigo-900/20 text-indigo-300">
+                    <span className="text-sm font-medium">No Image</span>
+                  </div>
+                )}
+              </div>
 
               <div className="chroma-details">
                 <h3 className="chroma-title">{item.title}</h3>
-                <p className="chroma-desc line-clamp-2">{item.deskripsi || "No description provided."}</p>
+                <p className="chroma-desc">{item.deskripsi || item.fullDescription || "No description provided."}</p>
 
                 {/* Tech Stack Pills */}
                 <div className="chroma-tags">
