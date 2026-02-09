@@ -101,7 +101,7 @@ export const listProyek = [
     images: [placeholderImg],
     deskripsi: "Web untuk Menghitung Kalori Sehari Hari.",
     github: null,
-    demo: https://food-record-seven.vercel.app/,
+    demo: "https://food-record-seven.vercel.app/",
     tech: ["Javascript", "NextJS", "Tailwind"],
     dad: "700",
   },
