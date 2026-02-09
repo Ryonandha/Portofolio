@@ -40,7 +40,7 @@ export const listProyek = [
     // Gunakan array images agar slider berfungsi
     images: [placeholderImg, placeholderImg],
     deskripsi: "Sistem deteksi dini kesehatan mental mahasiswa menggunakan metode IndoBERT.",
-    github: "https://github.com/Ryonandha/SiPeka-STIKOM",
+    github: null,
     demo: null,
     tech: ["Python", "IndoBERT", "Flask", "React"],
     dad: "100",
@@ -94,5 +94,15 @@ export const listProyek = [
     demo: null,
     tech: ["Laravel", "MySQL", "PHP"],
     dad: "600",
+  },
+   {
+    id: 7,
+    title: "Food Record Daily",
+    images: [placeholderImg],
+    deskripsi: "Web untuk Menghitung Kalori Sehari Hari.",
+    github: null,
+    demo: https://food-record-seven.vercel.app/,
+    tech: ["Javascript", "NextJS", "Tailwind"],
+    dad: "700",
   },
 ];
