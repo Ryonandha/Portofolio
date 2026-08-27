@@ -1,4 +1,4 @@
-// src/data.js - Updated with real project data and CORRECT images
+// src/data.js - Updated with real project data and CORRECT local screenshot paths
 
 // 1. IMPORT GAMBAR TOOLS
 import imgVscode from "./assets/tools/vscode.png";
@@ -11,8 +11,8 @@ import imgJs from "./assets/tools/js.png";
 import imgPHP from "./assets/tools/php.png";
 import imgMySQL from "./assets/tools/mysql.png";
 import imgTs from "./assets/tools/ts.png";
-import imgLaravel from "./assets/tools/php.png"; // placeholder
-import imgPython from "./assets/tools/vscode.png"; // placeholder
+import imgLaravel from "./assets/tools/php.png"; // placeholder - use php for laravel
+import imgPython from "./assets/tools/vscode.png"; // placeholder - use vscode for python
 import imgFlask from "./assets/tools/vscode.png"; // placeholder
 import imgIndoBERT from "./assets/tools/ai.png"; // ai.png already exists
 
