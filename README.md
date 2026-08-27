@@ -1,43 +1,115 @@
-# Hi, saya Ryonandha
+# Portofolio Website (Vite + React)
 
-Mahasiswa Sistem Informasi semester 7 di STIKOM Yos Sudarso Purwokerto. Fokus utama saya saat ini adalah web development dengan Laravel, dan sedang mengerjakan skripsi tentang klasifikasi teks bahasa Indonesia menggunakan IndoBERT.
+Source code website portofolio pribadi saya. Konten (daftar proyek, deskripsi, link GitHub/demo) diambil dari **data.js** dan ditampilkan via komponen React.
 
-Sehari-hari saya paling nyaman di ekosistem PHP/Laravel untuk backend dan React untuk frontend. Beberapa proyek di bawah sudah live, sisanya bisa dijalankan lokal dengan instruksi di masing-masing README.
+**Live:** https://portofolio-ryon.vercel.app
 
-Saya juga menerima pekerjaan freelance: pembuatan aplikasi web Laravel, pengolahan data, dan pelabelan dataset. Hubungi saya di [ryonandahar@gmail.com](mailto:ryonandahar@gmail.com) kalau ada yang bisa saya bantu.
+---
 
-## Proyek pilihan
+## Stack
 
-### SiPeka — Sistem Deteksi Dini Kesehatan Mental
-Skripsi saya. Aplikasi web (Laravel + Flask) yang membantu staf kampus melakukan skrining awal kesehatan mental mahasiswa lewat analisis teks. Model klasifikasi emosinya memakai IndoBERT hasil fine-tuning pada dataset bahasa Indonesia, di-deploy sebagai REST API di Azure Container Apps. Akurasi model mencapai 77,30% dengan F1-macro 0,758 (baseline naik 10,10 poin).
-**Stack:** Laravel, Flask, PyTorch Transformers, MySQL, Azure Container Apps
-[Repository](https://github.com/Ryonandha/SiPeka-STIKOM) *(repo bersih sedang disiapkan)*
+- **React 19** + **Vite 7** (ESM)
+- **Tailwind CSS 4** (via `@tailwindcss/vite`)
+- Animasi: AOS, animate.css, GSAP, Motion
+- 3D/Visual: Three.js, @react-three/fiber, @react-three/drei, @react-three/rapier, OGL
+- Icons: Lucide React, React Icons, Remixicon
+- Firebase (untuk keperluan auth/database jika nanti dipakai)
 
-### Sistem Manajemen Relawan — Yayasan Anak-Anak Terang
-Aplikasi internal untuk yayasan yang menangani anak-anak dengan kebutuhan khusus: pengelolaan relawan, penjadwalan pendampingan, sampai penerbitan sertifikat otomatis. Dipakai untuk kegiatan nyata yayasan, bukan sekadar proyek latihan.
-**Stack:** Laravel 11, Breeze, Spatie Permission (multi-role), MySQL
-[Repository](https://github.com/Ryonandha/relawan-aat) · screenshot dalam repo
+---
 
-### Crypto Pulse Dashboard
-Dashboard harga crypto real-time via WebSocket dengan chart TradingView. Update harga tanpa reload halaman.
-**Stack:** React 19, Vite, Tailwind CSS v4, Lightweight Charts
-[Live demo](https://crypto-dashboard-porto.vercel.app/) · [Repository](https://github.com/Ryonandha/crypto-dashboard)
+## Struktur Proyek
 
-### FlixMeow — Movie Discovery
-Aplikasi pencarian film yang mengonsumsi TMDB API: pencarian, detail film, rating, responsive di semua ukuran layar.
-**Stack:** React, Vite, Tailwind CSS, TMDB API
-[Live demo](https://react-movie-discovery-flixmeow.vercel.app/) · [Repository](https://github.com/Ryonandha/react-movie-discovery-flixmeow)
+```
+Portofolio/
+├── public/                 # Aset statis (gambar project, CV.pdf)
+│   ├── kanban.png          # Screenshot Kanban/FlixMeow (placeholder untuk semua)
+│   ├── relawan-aat.png     # Screenshot Relawan AAT
+│   ├── task-api.png        # Screenshot Task API
+│   ├── sms-spam.png        # Screenshot SMS Spam Detector
+│   ├── ryonandha.png       # Foto profil (hero)
+│   ├── hero-img.webp       # Background hero
+│   └── CV.pdf              # CV download
+├── src/
+│   ├── assets/tools/       # Ikon tech stack (PNG)
+│   ├── components/         # Komponen UI (Navbar, Footer, ProfileCard, ShinyText, BlurText, Lanyard, Aurora, ChromaGrid, ProjectModal, PreLoader)
+│   ├── data.js             # DATA UTAMA: listTools + listProyek — EDIT DI SINI
+│   ├── App.jsx             # Layout halaman (Hero, About, Tools, Projects, Contact)
+│   ├── main.jsx            # Entry point
+│   └── index.css / App.css # Global & component styles
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
-### SMS Spam Detector (Bahasa Indonesia)
-Klasifikasi SMS spam/ham dengan Naive Bayes, lengkap dari preprocessing sampai evaluasi, ditulis sebagai notebook yang bisa direproduksi.
-**Stack:** Python, scikit-learn, Jupyter
-[Repository](https://github.com/Ryonandha/sms-spam-detector-indonesia)
+---
 
-## Yang lagi saya kerjakan
-- Menyelesaikan skripsi SiPeka (uji penerimaan pengguna tahap akhir)
-- Memperdalam NLP bahasa Indonesia, khususnya fine-tuning model transformer kecil
+## Menjalankan Lokal
 
-## Kontak
-Email: [ryonandahar@gmail.com](mailto:ryonandahar@gmail.com)
-LinkedIn: [linkedin.com/in/ryonandha](https://www.linkedin.com/in/ryonandha)
-Instagram: [@ryon_ap](https://instagram.com/ryon_ap)
+```bash
+# Clone
+git clone https://github.com/Ryonandha/Portofolio.git
+cd Portofolio
+
+# Install deps
+npm install
+
+# Development server (HMR)
+npm run dev
+# Buka http://localhost:5173
+
+# Production build
+npm run build
+# Output di folder dist/
+
+# Preview build lokal
+npm run preview
+```
+
+---
+
+## Mengubah Konten Proyek
+
+Semua data proyek ada di **`src/data.js`** — edit array `listProyek`:
+
+```js
+export const listProyek = [
+  {
+    id: 1,
+    title: "Nama Proyek",
+    images: ["/nama-file-di-public.png"],  // gambar di public/
+    deskripsi: "Deskripsi singkat...",
+    github: "https://github.com/Ryonandha/repo",
+    demo: "https://demo.vercel.app/",       // atau null
+    tech: ["React", "Tailwind", "API"],     // tag teknologi
+    dad: "100",                             // delay AOS (ms)
+  },
+  // ...
+];
+```
+
+**Gambar:** taruh file PNG/JPG di `public/`, lalu referensikan dengan `/nama-file.png`.
+
+**Tech stack (tools):** edit array `listTools` di file yang sama.
+
+---
+
+## Deploy ke Vercel
+
+1. Push ke GitHub (branch `main`)
+2. Import project di Vercel → Framework Preset: **Vite**
+3. Build Command: `npm run build` (default)
+4. Output Directory: `dist` (default)
+5. Environment variables: tidak perlu kecuali pakai Firebase
+
+---
+
+## Catatan
+
+- `hero-img.webp` dan `ryonandha.png` cukup besar (~2 MB). Untuk performa produksi, pertimbangkan kompresi atau pakai WebP/AVIF yang lebih kecil.
+- `CV.pdf` di `public/` akan tersedia di `/CV.pdf` (sudah dipakai di tombol *Download CV* di Hero).
+- Komponen 3D (`Aurora`, `Lanyard`, `ChromaGrid`) pakai Three.js — pastikan browser mendukung WebGL.
+
+---
+
+Dibuat oleh [Ryonandha](https://github.com/Ryonandha) · 2026

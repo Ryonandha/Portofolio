@@ -1,6 +1,6 @@
-// src/data.js
+// src/data.js - Updated with real project data and images
 
-// 1. IMPORT GAMBAR TOOLS (Gunakan gambar yang SUDAH ADA di folder assets)
+// 1. IMPORT GAMBAR TOOLS
 import imgVscode from "./assets/tools/vscode.png";
 import imgReact from "./assets/tools/reactjs.png";
 import imgNext from "./assets/tools/nextjs.png";
@@ -11,14 +11,20 @@ import imgJs from "./assets/tools/js.png";
 import imgPHP from "./assets/tools/php.png";
 import imgMySQL from "./assets/tools/mysql.png";
 import imgTs from "./assets/tools/ts.png";
+import imgLaravel from "./assets/tools/php.png"; // placeholder - use php for laravel
+import imgPython from "./assets/tools/vscode.png"; // placeholder - use vscode for python
+import imgFlask from "./assets/tools/vscode.png"; // placeholder
+import imgIndoBERT from "./assets/tools/ai.png"; // ai.png already exists
 
-// PENTING: Gunakan gambar placeholder yang ADA dulu agar tidak error build
-// Nanti Anda bisa upload gambar laravel.png dan python.png ke folder assets jika sudah ada
-const imgLaravel = imgPHP; // Placeholder sementara pakai PHP
-const imgPython = imgVscode; // Placeholder sementara pakai VS Code
-
-// Placeholder untuk gambar project
-const placeholderImg = imgVscode;
+// 2. IMPORT PROJECT IMAGES (from public folder)
+import imgSiPeka from "/kanban.png"; // will use for SiPeka
+import imgRelawanAat from "/relawan-aat.png";
+import imgTaskApi from "/task-api.png";
+import imgEsKopi from "/kanban.png"; // placeholder
+import imgRun2026 from "/kanban.png"; // placeholder
+import imgKanban from "/kanban.png";
+import imgFlixMeow from "/kanban.png"; // placeholder
+import imgSmsSpam from "/sms-spam.png";
 
 export const listTools = [
   { id: 1, gambar: imgVscode, nama: "VS Code", ket: "Code Editor", dad: "100" },
@@ -36,73 +42,82 @@ export const listTools = [
 export const listProyek = [
   {
     id: 1,
-    title: "Mental Health Detection",
-    // Gunakan array images agar slider berfungsi
-    images: [placeholderImg, placeholderImg],
-    deskripsi: "Sistem deteksi dini kesehatan mental mahasiswa menggunakan metode IndoBERT.",
-    github: null,
+    title: "SiPeka — Mental Health Screening",
+    images: [imgSiPeka],
+    deskripsi: "Sistem deteksi dini kesehatan mental mahasiswa via analisis teks (IndoBERT fine-tuned 4 kelas, akurasi 77.3%, F1-macro 0.758). Arsitektur: Laravel + Flask API, Azure Container Apps.",
+    github: "https://github.com/Ryonandha/SiPeka-STIKOM",
     demo: null,
-    tech: ["Python", "IndoBERT", "Flask", "React"],
+    tech: ["Laravel", "Flask", "IndoBERT", "Azure"],
     dad: "100",
   },
   {
     id: 2,
-    title: "SMS Spam Detector",
-    images: [placeholderImg],
-    deskripsi: "Aplikasi Machine Learning untuk mendeteksi SMS spam dalam bahasa Indonesia.",
-    github: "https://github.com/Ryonandha/sms-spam-detector-indonesia",
+    title: "Relawan AAT — Volunteer Management",
+    images: [imgRelawanAat],
+    deskripsi: "Sistem manajemen relawan Yayasan Anak-Anak Terang: multi-role auth (Spatie), jadwal pendampingan, sertifikat otomatis, dashboard admin.",
+    github: "https://github.com/Ryonandha/relawan-aat",
     demo: null,
-    tech: ["Python", "Streamlit", "Scikit-Learn"],
+    tech: ["Laravel", "Spatie Permission", "Livewire"],
     dad: "200",
   },
   {
     id: 3,
-    title: "Movie Discovery App",
-    images: [placeholderImg],
-    deskripsi: "Aplikasi pencarian film interaktif yang menggunakan TMDB API.",
-    github: "https://github.com/Ryonandha/react-movie-discovery-flixmeow",
-    demo: "https://react-movie-discovery-flixmeow.vercel.app/",
-    tech: ["React JS", "Tailwind CSS", "TMDB API"],
+    title: "Laravel Task API",
+    images: [imgTaskApi],
+    deskripsi: "RESTful API manajemen tugas lengkap: CRUD, Sanctum auth, filtering, pagination. Dokumentasi via Scribe.",
+    github: "https://github.com/Ryonandha/laravel-task-api",
+    demo: null,
+    tech: ["Laravel 11", "MySQL", "Sanctum", "Scribe"],
     dad: "300",
   },
   {
     id: 4,
-    title: "Interactive Kanban Board",
-    images: [placeholderImg],
-    deskripsi: "Aplikasi manajemen tugas bergaya Trello dengan fitur Drag-and-Drop.",
-    github: "https://github.com/Ryonandha/react-kanban-portfolio",
-    demo: "https://react-kanban-portfolio.vercel.app/",
-    tech: ["React JS", "Dnd Kit", "Tailwind"],
+    title: "Es Kopi Brasil — Landing Page",
+    images: [imgEsKopi],
+    deskripsi: "Landing page kedai es krim & kopi legendaris Purwokerto. Next.js 15, Framer Motion, lightbox gallery, SEO-ready.",
+    github: "https://github.com/Ryonandha/es-kopi-brasil",
+    demo: "https://es-kopi-brasil.vercel.app/",
+    tech: ["Next.js 15", "Tailwind", "Framer Motion"],
     dad: "400",
   },
   {
     id: 5,
-    title: "Task Management API",
-    images: [placeholderImg],
-    deskripsi: "Backend API lengkap untuk aplikasi manajemen tugas dengan autentikasi.",
-    github: "https://github.com/Ryonandha/laravel-task-api",
-    demo: null,
-    tech: ["Laravel", "MySQL", "Scribe"],
+    title: "Run 2026 — Event Registration",
+    images: [imgRun2026],
+    deskripsi: "Platform registrasi event Eco Padjadjaran 2026: NextAuth, Prisma, Midtrans payment, Leaflet maps, Resend email, QR check-in.",
+    github: "https://github.com/Ryonandha/Run-2026",
+    demo: "https://run-2026.vercel.app/",
+    tech: ["Next.js", "Prisma", "NextAuth", "Midtrans", "Leaflet"],
     dad: "500",
   },
   {
     id: 6,
-    title: "Gamification MATH",
-    images: [placeholderImg],
-    deskripsi: "Web untuk Gamifikasi Mata Pelajaran Matematika SD.",
-    github: "https://github.com/Ryonandha/Gamify",
-    demo: null,
-    tech: ["Laravel", "MySQL", "PHP"],
+    title: "Interactive Kanban Board",
+    images: [imgKanban],
+    deskripsi: "Trello clone dengan drag-and-drop (@dnd-kit), localStorage persistence, multiple board support. Dibangun pakai React + Vite.",
+    github: "https://github.com/Ryonandha/react-kanban-portfolio",
+    demo: "https://react-kanban-portfolio.vercel.app/",
+    tech: ["React", "Vite", "DnD Kit", "Tailwind"],
     dad: "600",
   },
-   {
+  {
     id: 7,
-    title: "Food Record Daily",
-    images: [placeholderImg],
-    deskripsi: "Web untuk Menghitung Kalori Sehari Hari.",
-    github: null,
-    demo: "https://food-record-seven.vercel.app/",
-    tech: ["Javascript", "NextJS", "Tailwind"],
+    title: "FlixMeow — Movie Discovery",
+    images: [imgFlixMeow],
+    deskripsi: "Aplikasi pencarian film TMDB API: search debounce, grid populer, halaman detail (rating, genre, overview), dark mode default.",
+    github: "https://github.com/Ryonandha/react-movie-discovery-flixmeow",
+    demo: "https://react-movie-discovery-flixmeow.vercel.app/",
+    tech: ["React", "Tailwind", "TMDB API"],
     dad: "700",
+  },
+  {
+    id: 8,
+    title: "SMS Spam Detector (Indonesia)",
+    images: [imgSmsSpam],
+    deskripsi: "Klasifikasi SMS spam/ham bahasa Indonesia: Naive Bayes + TF-IDF, preprocessing Sastrawi, evaluasi akurasi 96.8%. Notebook lengkap.",
+    github: "https://github.com/Ryonandha/sms-spam-detector-indonesia",
+    demo: null,
+    tech: ["Python", "scikit-learn", "Jupyter"],
+    dad: "800",
   },
 ];
