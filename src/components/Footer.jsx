@@ -4,9 +4,9 @@ import { VscHome, VscArchive, VscAccount } from "react-icons/vsc";
 
 const Footer = () => {
   const items = [
-    { icon: <VscHome size={20} />, label: "Home", onClick: () => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" }) },
+    { icon: <VscHome size={20} />, label: "Home", onClick: () => window.scrollTo({ top: 0, behavior: "smooth" }) },
     { icon: <VscAccount size={20} />, label: "About Me", onClick: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }) },
-    { icon: <VscArchive size={20} />, label: "Project", onClick: () => document.getElementById("project")?.scrollIntoView({ behavior: "smooth" }) },
+    { icon: <VscArchive size={20} />, label: "Projects", onClick: () => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }) },
   ];
 
   return (

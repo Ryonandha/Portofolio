@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import ShinyText from "./components/ShinyText/ShinyText";
 import BlurText from "./components/BlurText/BlurText";
@@ -40,7 +40,7 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 overflow-x-hidden">
         {/* === HERO SECTION === */}
-        <section aria-labelledby="hero-heading" className="relative pt-32 pb-20 md:pt-0 md:pb-0 md:min-h-screen md:grid md:grid-cols-2 md:items-center md:gap-16">
+        <section id="home" aria-labelledby="hero-heading" className="relative pt-32 pb-20 md:pt-0 md:pb-0 md:min-h-screen md:grid md:grid-cols-2 md:items-center md:gap-16">
           {/* TEXT (Left) */}
           <div className="order-1 md:order-1 flex flex-col items-center md:items-start text-center md:text-left animate__animated animate__fadeInUp">
             <h1 id="hero-heading" className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight leading-tight max-w-xl">
@@ -48,7 +48,7 @@ function App() {
             </h1>
 
             <p className="mb-10 w-full max-w-lg md:max-w-none text-indigo-100 text-lg sm:text-xl md:text-2xl font-light leading-relaxed">
-              Information Systems student at STIKOM Yos Sudarso Purwokerto. Building web apps with Laravel & React. Thesis: mental health screening with IndoBERT.
+              Mahasiswa Sistem Informasi semester 7 yang membangun aplikasi web nyata — dari sistem manajemen relawan hingga deteksi dini kesehatan mental berbasis IndoBERT.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -99,18 +99,13 @@ function App() {
 
                 <div className="prose prose-invert max-w-none text-gray-300 leading-relaxed space-y-6">
                   <p>
-                    I'm a 7th-semester Information Systems student at STIKOM Yos Sudarso Purwokerto.
-                    My thesis, <strong>SiPeka</strong>, is a mental health early detection system for students
-                    using IndoBERT fine-tuned on 4 emotion classes (accuracy 77.3%, F1-macro 0.758).
+                    Saya mahasiswa Sistem Informasi semester 7 di STIKOM Yos Sudarso Purwokerto. Skripsi saya, <strong>SiPeka</strong>, adalah sistem deteksi dini kesehatan mental mahasiswa menggunakan IndoBERT yang di-fine-tune pada 4 kelas emosi (akurasi 77,3%, F1-macro 0,758).
                   </p>
                   <p>
-                    Before that, I built a volunteer management system for a real foundation (<strong>Relawan AAT</strong>),
-                    an event registration platform with payments (<strong>Run 2026</strong>),
-                    and smaller tools like a Kanban board and a movie search app.
+                    Sebelumnya, saya membangun sistem manajemen relawan untuk yayasan nyata (<strong>Relawan AAT</strong>), platform registrasi event berbayar (<strong>Run 2026</strong>), landing page bisnis lokal, dan beberapa tools kecil seperti Kanban board dan aplikasi pencarian film.
                   </p>
                   <p>
-                    Day-to-day stack: Laravel for backends, React/Next.js for frontends, Tailwind for styling.
-                    Comfortable with MySQL, Postgres, and deploying to Vercel or Azure Container Apps.
+                    Stack sehari-hari: Laravel untuk backend, React/Next.js untuk frontend, Tailwind untuk styling. Sudah terbiasa dengan MySQL, PostgreSQL, serta deployment ke Vercel dan Azure Container Apps.
                   </p>
                 </div>
 
@@ -192,11 +187,11 @@ function App() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-500" />
             </span>
-            <span className="text-indigo-200 text-sm font-medium">Open for internship & freelance</span>
+            <span className="text-indigo-200 text-sm font-medium">Terbuka untuk internship & freelance</span>
           </div>
 
           <h2 id="contact-heading" className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight" data-aos="fade-up">
-            Let's build something useful together.
+            Ada proyek yang ingin dikerjakan bersama?
           </h2>
 
           <a

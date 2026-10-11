@@ -7,11 +7,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -20,13 +16,12 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || isOpen ? "bg-[#0f172a]/80 backdrop-blur-md border-b border-indigo-500/10 shadow-lg shadow-indigo-500/10" : "bg-transparent"}`}>
-      {/* RESTORE: max-w-7xl agar sejajar dengan konten utama Desktop */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 cursor-pointer group">
+          <div className="flex-shrink-0">
             <a href="#" className="text-2xl font-bold tracking-wider text-white">
-              <ShinyText text="Portofolio" disabled={false} speed={3} className="custom-class" />
+              <ShinyText text="Ryonandha" disabled={false} speed={3} className="custom-class" />
             </a>
           </div>
 
@@ -34,21 +29,26 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <NavLink href="#about">About</NavLink>
-              <NavLink href="#project">Project</NavLink>
+              <NavLink href="#skills">Skills</NavLink>
+              <NavLink href="#projects">Projects</NavLink>
               <NavLink href="#contact">Contact</NavLink>
             </div>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="-mr-2 flex md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-900 focus:outline-none transition-colors">
-              <span className="sr-only">Open main menu</span>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation menu"
+              className="inline-flex items-center justify-center p-2 rounded-md text-indigo-200 hover:text-white hover:bg-indigo-900 focus:outline-none transition-colors"
+            >
               {!isOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               )}
@@ -61,15 +61,10 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-[#0f172a] border-b border-indigo-500/20 backdrop-blur-xl">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>
-              About
-            </MobileNavLink>
-            <MobileNavLink href="#project" onClick={() => setIsOpen(false)}>
-              Project
-            </MobileNavLink>
-            <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </MobileNavLink>
+            <MobileNavLink href="#about" onClick={() => setIsOpen(false)}>About</MobileNavLink>
+            <MobileNavLink href="#skills" onClick={() => setIsOpen(false)}>Skills</MobileNavLink>
+            <MobileNavLink href="#projects" onClick={() => setIsOpen(false)}>Projects</MobileNavLink>
+            <MobileNavLink href="#contact" onClick={() => setIsOpen(false)}>Contact</MobileNavLink>
           </div>
         </div>
       )}
