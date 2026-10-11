@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Github, FileText, Menu, X, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, FileText, Menu, X, ArrowUpRight } from "lucide-react";
+import { personalInfo } from "../data";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +17,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Tentang", href: "#about" },
+    { name: "Pengalaman", href: "#experience" },
     { name: "Proyek", href: "#projects" },
     { name: "Keahlian", href: "#skills" },
     { name: "Pendidikan", href: "#education" },
@@ -49,7 +51,7 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="px-4 py-1.5 rounded-full text-xs lg:text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60 transition-all"
+                className="px-3.5 py-1.5 rounded-full text-xs lg:text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60 transition-all"
               >
                 {link.name}
               </a>
@@ -57,9 +59,19 @@ const Navbar = () => {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2">
             <a
-              href="https://github.com/Ryonandha"
+              href={personalInfo.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
+              className="p-2 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 rounded-lg border border-transparent hover:border-zinc-800 transition-all"
+            >
+              <Linkedin size={18} />
+            </a>
+
+            <a
+              href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
@@ -71,7 +83,7 @@ const Navbar = () => {
             <a
               href="/CV.pdf"
               download="CV_Ryonandha.pdf"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white hover:shadow-md hover:shadow-white/10 transition-all"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-lg bg-zinc-100 text-zinc-950 hover:bg-white hover:shadow-md hover:shadow-white/10 transition-all ml-1"
             >
               <FileText size={15} />
               <span>Unduh CV</span>
@@ -112,19 +124,28 @@ const Navbar = () => {
               <ArrowUpRight size={14} className="text-zinc-500" />
             </a>
           ))}
-          <div className="pt-3 border-t border-zinc-900 flex gap-3">
+          <div className="pt-3 border-t border-zinc-900 flex gap-2">
             <a
-              href="https://github.com/Ryonandha"
+              href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300"
+            >
+              <Linkedin size={14} />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={personalInfo.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-medium bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300"
             >
               <Github size={14} />
               <span>GitHub</span>
             </a>
             <a
-              href="mailto:ryonandhar@gmail.com"
-              className="flex-1 flex items-center justify-center gap-2 py-2 text-xs font-medium bg-indigo-600 text-white rounded-lg"
+              href={`mailto:${personalInfo.email}`}
+              className="flex-1 flex items-center justify-center py-2 text-xs font-medium bg-indigo-600 text-white rounded-lg"
             >
               <span>Email</span>
             </a>
