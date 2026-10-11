@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6;
   font-weight: 400;
   color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #0f172a;
+  color: #f4f4f5;
+  background-color: #09090b;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,77 +17,66 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4338ca;
-  border-radius: 5px;
+  background: #27272a;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6366f1;
+  background: #3f3f46;
 }
 
 ::selection {
-  background: #6366f1;
-  color: white;
-}
-
-a {
-  font-weight: 500;
-  color: #818cf8;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-a:hover {
-  color: #a5b4fc;
+  background: #3b82f6;
+  color: #ffffff;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #09090b;
+  color: #f4f4f5;
   overflow-x: hidden;
 }
 
-@layer base {
-  body {
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
+/* Subtle dot grid pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* Prose overrides for dark mode About section */
-.prose-invert {
-  --tw-prose-body: #d1d5db;
-  --tw-prose-headings: #ffffff;
-  --tw-prose-lead: #9ca3af;
-  --tw-prose-links: #818cf8;
-  --tw-prose-bold: #ffffff;
-  --tw-prose-counters: #6b7280;
-  --tw-prose-bullets: #4b5563;
-  --tw-prose-hr: #1e293b;
-  --tw-prose-quotes: #f3f4f6;
-  --tw-prose-quote-borders: #4338ca;
-  --tw-prose-captions: #6b7280;
-  --tw-prose-kbd: #ffffff;
-  --tw-prose-kbd-shadows: #1e1b4b;
-  --tw-prose-code: #a5b4fc;
-  --tw-prose-pre-code: #e5e7eb;
-  --tw-prose-pre-bg: #1e1b4b;
-  --tw-prose-th-borders: #374151;
-  --tw-prose-td-borders: #1e293b;
+/* Subtle grid line pattern */
+.bg-grid-lines {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-/* Focus visible for accessibility */
+/* Glass panel */
+.glass-panel {
+  background: rgba(18, 18, 23, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Accessibility focus ring */
 *:focus-visible {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -97,15 +86,4 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-
-  .animate__animated {
-    animation-duration: 0.01ms !important;
-  }
-}
-
-/* Smooth animations for AOS */
-[data-aos][data-aos][data-aos-duration="800"],
-[data-aos][data-aos][data-aos-duration="1000"] {
-  transition-property: opacity, transform;
-  transition-timing-function: ease-out;
 }
